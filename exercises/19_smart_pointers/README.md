@@ -5,6 +5,7 @@ Smart pointers in Rust often own the data they point to, while references only b
 
 ## Further Information
 
+- [Video](https://www.youtube.com/watch?v=CTTiaOo4cbY)
 - [Smart Pointers](https://doc.rust-lang.org/book/ch15-00-smart-pointers.html)
 - [Using Box to Point to Data on the Heap](https://doc.rust-lang.org/book/ch15-01-box.html)
 - [Rc\<T\>, the Reference Counted Smart Pointer](https://doc.rust-lang.org/book/ch15-04-rc.html)
