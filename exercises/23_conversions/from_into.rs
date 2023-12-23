@@ -40,10 +40,48 @@ impl Default for Person {
 // If while parsing the age, something goes wrong, then return the default of
 // Person Otherwise, then return an instantiated Person object with the results
 
-// I AM NOT DONE
-
 impl From<&str> for Person {
     fn from(s: &str) -> Person {
+        // SOLUTION 1
+        // if let Some((name, age_str)) = s.split_once(",") {
+        //     if name.len() <= 0 {
+        //         return Person::default();
+        //     }
+        //     if let Ok(age) = age_str.parse::<usize>() {
+        //         return Person {
+        //             name: name.to_string(),
+        //             age: age,
+        //         };
+        //     } else {
+        //         return Person::default();
+        //     }
+        // } else {
+        //     return Person::default();
+        // }
+        // SOLUTION 2
+        let mut splitted = s.split(",");
+        let mut name = "";
+        let mut age_str = "";
+        if let Some(n) = splitted.next() {
+            name = n;
+        } else {
+            return Person::default();
+        }
+        if let Some(a_str) = splitted.next() {
+            age_str = a_str;
+        } else {
+            return Person::default();
+        }
+        if name.len() <= 0 {
+            return Person::default();
+        }
+        if let Ok(age) = age_str.parse::<usize>() {
+            return Person {
+                name: name.to_string(),
+                age: age,
+            };
+        }
+        return Person::default();
     }
 }
 
@@ -123,7 +161,8 @@ mod tests {
         assert_eq!(p.name, "John");
         assert_eq!(p.age, 30);
     }
-
+    // Just to be clear, I don't agree that this two tests bellow should pass
+    // to make it pass I created solution 2.
     #[test]
     fn test_trailing_comma() {
         let p: Person = Person::from("Mike,32,");
